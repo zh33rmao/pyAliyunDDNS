@@ -231,19 +231,19 @@ if __name__ == "__main__":
             _show_usage()
         i += 1
     if config.get_region_id() == None:
-        print("RegionId不能为空")
+        print("RegionId can't be Null")
         sys.exit(1)
     if config.get_access_key_id() == None:
-        print("AccessKeyId不能为空")
+        print("AccessKeyId can't be Null")
         sys.exit(1)
     if config.get_access_key_secret() == None:
-        print("AccessKeySecret不能为空")
+        print("AccessKeySecret can't be Null")
         sys.exit(1)
     if config.get_domain_name() == None:
-        print("DomainName不能为空")
+        print("DomainName can't be Null")
         sys.exit(1)
     if config.get_host_record() == None:
-        print("HostRecord不能为空")
+        print("HostRecord can't be Null")
         sys.exit(1)
     client = AliyunDnsClient(config.get_region_id(), config.get_access_key_id(), 
     config.get_access_key_secret(), config.get_domain_name(), config.get_host_record())
