@@ -26,19 +26,13 @@ TIME_OUT:Final[int] = 60
 
 class AliyunDnsClient():
     def __init__(self, region, key_id, key_secret, domain, host):
-        self.__region = region
-        self.__key_id = key_id
-        self.__key_secret = key_secret
         self.__domain = domain
         self.__host = host
         
-        self.__credentials = AccessKeyCredential(self.__key_id, self.__key_secret)
+        self.__credentials = AccessKeyCredential(key_id, key_secret)
         # use STS Token
         # credentials = StsTokenCredential('<your-access-key-id>', '<your-access-key-secret>', '<your-sts-token>')
         self.__client = AcsClient(region_id=region, credential=self.__credentials)
-
-    def update_domain(self):
-        print(self.__region)
 
     def get_dns_record_ip_address(self, family):
         request = DescribeDomainRecordsRequest()
@@ -106,7 +100,7 @@ class AliyunDnsClient():
         if (ddnsrecord.get_ip_address()==cur_ip_addr):
             print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " : ip same, not changing")
         else:
-            status = self.update_dns_record(family, ddnsrecord.get_record_id(), ddnsrecord.get_ip_address(),self.__host)
+            status = self.update_dns_record(family, ddnsrecord.get_record_id(), cur_ip_addr,self.__host)
             if (status == "success"):
                 print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " :record successfully updated")
 
@@ -231,19 +225,19 @@ if __name__ == "__main__":
             _show_usage()
         i += 1
     if config.get_region_id() == None:
-        print("RegionId can't be Null")
+        print("RegionId不能为空")
         sys.exit(1)
     if config.get_access_key_id() == None:
-        print("AccessKeyId can't be Null")
+        print("AccessKeyId不能为空")
         sys.exit(1)
     if config.get_access_key_secret() == None:
-        print("AccessKeySecret can't be Null")
+        print("AccessKeySecret不能为空")
         sys.exit(1)
     if config.get_domain_name() == None:
-        print("DomainName can't be Null")
+        print("DomainName不能为空")
         sys.exit(1)
     if config.get_host_record() == None:
-        print("HostRecord can't be Null")
+        print("HostRecord不能为空")
         sys.exit(1)
     client = AliyunDnsClient(config.get_region_id(), config.get_access_key_id(), 
     config.get_access_key_secret(), config.get_domain_name(), config.get_host_record())
