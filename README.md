@@ -1,5 +1,8 @@
 # pyAliyunDDNS
 a python version of Dynamic binding ip to aliyun server
+there are also many awesome versions of Dynamic binding ip to aliyun server
+Shell Version: [https://github.com/shenwii/AliyunDDNS-Shell]()
+Java Version: [https://github.com/shenwii/AliyunDDNS]()
 
 # Requirements
 
